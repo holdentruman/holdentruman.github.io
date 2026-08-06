@@ -164,7 +164,8 @@ nav{
   position:relative;
 }
 .hero::after{
-  content:"";position:absolute;bottom:0;left:32px;right:32px;height:1px;
+  content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:calc(var(--max) - 64px);max-width:calc(100% - 64px);height:1px;
   background-image:repeating-linear-gradient(90deg, var(--grid-line) 0 5px, transparent 5px 13px);
 }
 
@@ -214,7 +215,8 @@ nav{
 /* ---------- SECTIONS ---------- */
 section{padding:88px 0;position:relative;}
 section::before{
-  content:"";position:absolute;top:0;left:32px;right:32px;height:1px;
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:calc(var(--max) - 64px);max-width:calc(100% - 64px);height:1px;
   background-image:repeating-linear-gradient(90deg, var(--grid-line) 0 5px, transparent 5px 13px);
 }
 .section-head{margin-bottom:48px;}
@@ -315,7 +317,8 @@ section::before{
 /* ---------- FOOTER ---------- */
 footer{padding:48px 0 64px;position:relative;}
 footer::before{
-  content:"";position:absolute;top:0;left:32px;right:32px;height:1px;
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:calc(var(--max) - 64px);max-width:calc(100% - 64px);height:1px;
   background-image:repeating-linear-gradient(90deg, var(--grid-line) 0 5px, transparent 5px 13px);
 }
 .footer-inner{
@@ -526,7 +529,7 @@ Outside of my academic work, I enjoy exploring philosophy, watching sports (Buck
 
 <footer>
   <div class="wrap footer-inner">
-    <p>© 2026 Holden Truman, Astronomy PhD Student, UIUC</p>
+    <p>© 2026 Holden Truman</p>
   </div>
 </footer>
 
@@ -835,21 +838,14 @@ Outside of my academic work, I enjoy exploring philosophy, watching sports (Buck
     shooters = shooters.filter(sh => sh.life < sh.maxLife && sh.x < W+50 && sh.y < H+50);
   }
 
-  function getScrollFade(){
-    const sc = window.scrollY || window.pageYOffset || 0;
-    const threshold = Math.max(window.innerHeight*0.85, 320);
-    return Math.max(0, Math.min(1, 1 - sc/threshold));
-  }
-
   let start = null;
   function frame(ts){
     if(start === null) start = ts;
     const t = (ts - start)/1000;
-    const fade = getScrollFade();
     ctx.fillStyle = '#07081a';
     ctx.fillRect(0,0,W,H);
     drawStars(t);
-    drawNebula(t, fade);
+    drawNebula(t, 1);
     drawShooters();
     if(!reduceMotion) requestAnimationFrame(frame);
   }
@@ -861,7 +857,7 @@ Outside of my academic work, I enjoy exploring philosophy, watching sports (Buck
     ctx.fillStyle = '#07081a';
     ctx.fillRect(0,0,W,H);
     drawStars(0);
-    drawNebula(0, getScrollFade());
+    drawNebula(0, 1);
   } else {
     requestAnimationFrame(frame);
     const hero = document.getElementById('overview');
