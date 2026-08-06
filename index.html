@@ -252,10 +252,10 @@ section::before{
 .tl-item:last-child{padding-bottom:0;}
 .tl-item::before{
   content:"";position:absolute;left:-32px;top:6px;
-  width:10px;height:10px;
-  background:var(--void);
-  border:2px solid var(--cyan);
-  transform:rotate(45deg);
+  width:11px;height:11px;
+  border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 0 3px var(--void), 0 0 0 4px var(--grid-line);
 }
 .tl-date{
   font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber);
